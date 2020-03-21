@@ -1,0 +1,128 @@
+.App {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-height: 150vh;
+  max-width: 1400px;
+  min-width: 500px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.thumbnail{
+  border-radius: 5px;
+  margin-top: 10px;
+  min-width: 25px;
+  min-width: 25px;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.about{
+  margin-left:50px;
+  margin-right:50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.card{
+  border-style: solid;
+  border-color: #FFFFFF;
+  min-width:100px;
+  min-height: 100px;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.65);
+}
+
+.card:hover{
+  border-color: #61dafb;
+  background: rgba(0,0,0,0.50);
+}
+
+
+#homeLink:link{
+  text-decoration: none;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  margin:25px;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.25);
+  justify-content: space-around;
+  padding: 25px;
+}
+
+
+h1 {
+  color: #FFFFFF;
+  transition: color 3s;
+}
+h1:hover{
+  color: #61dafb;
+}
+
+p{
+  padding:50px;
+  margin-left:auto;
+  margin-right:auto;
+  max-width: 800px;
+}
+
+
+a {
+  color: #61dafb;
+  transition: color 1s;
+}
+a:hover{
+  color: #FFFFFF;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.menu{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  padding-left: 10px;
+  margin:10px;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.75);
+  position: sticky;
+  top: 0;
+}
+
+h3:hover{
+  animation-delay:5s;
+  animation-name: rotate;
+  animation-duration: 2s;
+}
+
+
+li{
+  padding:10px;
+}
+
+#about-foto {
+  
+  padding-top:10px;
+  padding:10px;
+  max-height: 600px;
+  max-width: 450px;
+
+}
+
+
+#menu{
+  list-style: none;
+  display: inline-flex;
+
+}
