@@ -1,33 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import foto from './foto.jpg';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import foto from './background.jpg';
+import useFetch from './useFetch.js'
 
-const about = 
-{
-  "data": [
-    "Michael is a certified public accountant, interested in web development and data engineering. Michael has experience working with Python for web development using Flask, and for data analysis using Pandas and Dash. He also has experience using SQL in Postgres and SQLite. This website was built using ReactJS.",
-    "In his spare time he enjoys guitar, coffee, and long bike rides on the beach.",
-    "I'm interested in networking and full stack engineering as well as data engineering roles."
-  ]
-};
+const url = "http://mcrnkovich.io/blog/wp-json/wp/v2/";
 
 function About(props){
-  const pic = <img id="about-foto" src={props.foto} alt="Not Found"></img>;
-  const para = props.data.map((paragraph)=>(<p>{paragraph}</p>));
-
+  const pic = <div className="about-foto"><img className="about-foto" src={props.foto} alt="Not Found" /></div>;
+  const [about, isLoading] = useFetch(url+"pages/7", { content:{ rendered:"" }});
+  
   return (
       <div>
-        <h3 id="about" className="sectionHeader">About</h3>
+        <div id="about-heading" className="about">
+        <h2> Hi, my name is Mike. I am full stack software developer interested in all things coffee related.</h2>
+        </div>
+        {pic}
         <div className="about">
-          {pic}
           <div>
-            {para}
+            {isLoading ? (<p>Loading...</p>):
+              (<p className="load" dangerouslySetInnerHTML={{__html: about.content.rendered}}></p>)}
           </div>
         </div>
       </div>
     );
 }
+
+function Blog(props){
+
+  const [count, setCount] = useState(0);
+  const [posts, isLoading] = useFetch(url+"posts",[{content:{rendered:""},
+                                        title:{rendered:"Loading"},link:"#"}] );
+  posts.map( (p)=>( { name:p.title.rendered, link:p.link} ));
+  
+  return (  
+      <div className="blog">
+        <div className="blog-header">
+          <SideBar items={ posts.map( (p)=> ({ name:p.title.rendered,link:p.link })) } />
+          <h2 dangerouslySetInnerHTML={{__html: posts[count].title.rendered }}></h2>
+        </div>
+        <div className="blog-content">
+          <div dangerouslySetInnerHTML={{__html: posts[count].content.rendered }}></div>
+        </div>
+        <div className="row blog-arrows">
+          <button onClick={ 
+                  ()=> {
+                    count<=0 ? 
+                      setCount(posts.length-1):
+                      setCount(count-1)
+                  }}>Previous</button>
+          <button onClick={ 
+                  ()=> {
+                    count>=posts.length-1 ?
+                      setCount(0):
+                      setCount(count+1)
+                  }}>Next</button>
+        </div>
+      </div>
+    );
+}
+
+function SideBar(props){
+  return (
+      <div className="side-bar">
+        <ul>
+          <ListLink items={props.items} />
+        </ul>
+      </div>
+  );
+}
+
 
 function Projects(props){
   return (
@@ -75,8 +117,10 @@ function ListLink(props){
 function App() {
   const links = [{link:"https://www.github.com/mrcrnkovich", name:"GitHub"},
                   {link:"https://www.linkedin.com/in/michaelcrnkovich", name:"LinkedIn"}]
-  const internalLinks = [{link:"/blog", name:"Blog"},
-                  {link:"/about", name:"About"}];
+  const internalLinks = [
+                  {link:"/", name:"Home"},
+                  {link:"/blog", name:"Blog"},
+                  {link:"/projects", name:"Projects"}];
 
   const HeaderLinks = (
               <ul id="menu">
@@ -85,10 +129,9 @@ function App() {
               </ul>);
   
   const proLinks = {link:"https://www.github.com/mrcrnkovich", name:"CRM"};
-  const name ="about";
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <nav class="menu">
           <a id="homeLink" href="/"><h1>Michael Crnkovich</h1></a>
           {HeaderLinks}
@@ -96,15 +139,14 @@ function App() {
         <div id="content">
           <Switch>
             <Route exact path="/">
-              <h3>Landing Page</h3>
+              <About foto={foto} />
+            </Route>
+            <Route path={"/projects"}>
               <h3 id="projects">Projects</h3>
               <Projects links={proLinks} />
             </Route>
-            <Route path={"/"+name}>
-              <About foto={foto} data={about.data}/>
-            </Route>
             <Route path="/blog">
-              <h3> Blog to go here</h3>
+              <Blog />
             </Route>
           </Switch>
         </div>
