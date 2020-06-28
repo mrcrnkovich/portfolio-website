@@ -1,35 +1,6 @@
-div {
-  border-radius: 5px;
-}
-.app div {
-  animation: enter_from_bottom .6s ease-in-out 1;
-}
 body{
   border: 10px solid rgba(0,0,0,0.50);
 }
-
-@media (min-width: 300px) and (max-width: 600px){
-
-  #menu-toggle+label, #menu-toggle{
-    visibility: visible;
-  }
-
-  #menu-toggle {
-    position: absolute;
-    opacity: 0;
-  }
-
-  .menu h1, .menu ul {
-    visibility: hidden;
-    transform: scale(0,0);
-  }
-
-  #menu-toggle:checked {
-    opacity: 1;
-  }
-
-}
-
 
 /* Headings */
 h1 {
@@ -37,7 +8,9 @@ h1 {
   transition: 0.5s;
 }
 h1:hover{
+  color: #61dafb;
   text-decoration: none;
+  box-shadow: 2em 2em 2em #ccc;
 }
 h2{
   padding-top: 50px;
@@ -78,9 +51,12 @@ p{
 /* Classes */
 .app {
   background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   min-height: 100vh;
-  max-width: 1200px;
-  min-width: 350px;
+  max-width: 1140px;
+  min-width: 540px;
   margin-left:auto;
   margin-right:auto;
 }
@@ -96,22 +72,14 @@ div.about-foto{
   height: auto;
   overflow:hidden;
   padding: 10px;
-}
-.text-shadow {
-  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.25));
-}
-.shadow {
-  box-shadow: 0 0.1em 0.1em #ccc,
-              0 0.2em 0.2em #ccc,
-              0 0.5em 0.5em #ccc,
-              0 0.75em 0.75em #ccc,
-              0 1em 1em #ccc;
+  box-shadow: 1em 1em 2em #ccc;
 }
 img.about-foto{
   display: block;
   object-fit: contain;
   width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 .blog{
   min-height: 100vh;
@@ -126,38 +94,19 @@ div.blog-header > div {
 div.blog-header > h2{
   color: #FFFFFF;
 }
-.bottom-border{
-  border-bottom: 2px solid #ccc;
-}
-.card a{
-  display: inline-flex;
-}
 .card{
-  display: inline-flex;
-  padding: 1em;
   margin-left:10px;
-  border: 1px solid rgba(0,0,0,0.1);
-  min-width:250px;
-  max-width: 600px;
-  min-height: 150px;
-  max-height: 300px;
+  border-style: solid;
+  box-shadow: 2em 2em 2em #ccc;
+  border-color: rgba(0,0,0,0.25);
+  min-width:100px;
+  min-height: 100px;
   border-radius: 5px;
-  transition: 0.2s ease-in-out;
-
+  background: rgba(0,0,0,0.65);
 }
 .card:hover{
   border-color: #61dafb;
-  box-shadow: 0 0.05em 0.05em #ccc,
-              0 0.10em 0.10em #ccc,
-              0 0.15em 0.15em #ccc,
-              0 0.20em 0.20em #ccc,
-              0 0.25em 0.25em #ccc;
-}
-.card a{
-  border-bottom: none;
-}
-.card a:hover{
-  border-bottom: none;
+  background: rgba(0,0,0,0.50);
 }
 .menu{
   display:flex;
@@ -170,27 +119,13 @@ div.blog-header > h2{
   position: sticky;
   top: 0;
 }
-
-.p-2 .card{
-  margin-bottom: 1em;
-}
-.column{
-  display: flex;
-  flex-direction: column;
-}
-.projects {
-  display: grid;
-  grid-template-rows: 1fr 2fr auto;
-  grid-template-areas: 
-    "title"
-    "skills"
-    "projects";
-  grid-gap: 1em;
+.p-2{
+  padding: 2em;
 }
 .row{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  margin:25px;
   border-radius: 5px;
   justify-content: space-between;
   padding: 25px;
@@ -207,11 +142,11 @@ div.blog-header > h2{
   max-width: 100px;
   max-height: 100px;
 }
-.hidden{
-  visibility: hidden;
-}
 
 /* by Id */
+#load{
+  animation: enter_from_bottom 2s ease-in;
+}
 #menu{
   list-style: none;
   display: inline-flex;
@@ -220,13 +155,10 @@ div.blog-header > h2{
 /* Animations */
 @keyframes enter_from_bottom{
   0%{
-    transform: translateY(-1em);
-  }
-  50% {
-    transform: translateY(0.5em);
+    transform: translate(-100px, -100px);
   }
   100% {
-    transform: translateY(0);
+    transform: translate(0,0);
   }
 }
 

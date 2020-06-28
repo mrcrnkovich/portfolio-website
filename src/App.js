@@ -7,13 +7,13 @@ import useFetch from './useFetch.js'
 const url = "http://mcrnkovich.io/blog/wp-json/wp/v2/";
 
 function About(props){
-  const pic = <div className="about-foto"><img className="about-foto" src={props.foto} alt="Not Found" /></div>;
+  const pic = <div className="about-foto"><img className="about-foto shadow" src={props.foto} alt="Not Found" /></div>;
   const [about, isLoading] = useFetch(url+"pages/7", { content:{ rendered:"" }});
   
   return (
       <div>
         <div id="about-heading" className="about">
-        <h2> Hi, my name is Mike. I am full stack software developer interested in all things coffee related.</h2>
+        <h2 className=""> Hi, my name is Mike. I am full stack software developer interested in all things coffee related.</h2>
         </div>
         {pic}
         <div className="about">
@@ -21,6 +21,7 @@ function About(props){
             {isLoading ? (<p>Loading...</p>):
               (<p className="load" dangerouslySetInnerHTML={{__html: about.content.rendered}}></p>)}
           </div>
+          <p><a href="/projects">Learn more...</a></p>
         </div>
       </div>
     );
@@ -73,12 +74,19 @@ function SideBar(props){
 
 function Projects(props){
   return (
-        <div className="row">
+      <div className="projects">
+        <h3 id="projects" className="shadow">Projects</h3>
+        <div className="bottom-border shadow">
+          <p> Skills: HTML5, CSS3, Javascript, Python, SQL </p>
+          <p> Libraries: Pandas, Dash, React, Bootstrap</p>
+        </div>
+        <div className="row shadow p-2">
           <Card data={props.links} />
           <Card data={props.links} />
           <Card data={props.links} />
           <Card data={props.links} />
-        </div>);
+        </div>
+      </div>);
 }
 
 function Card(props){
@@ -86,8 +94,10 @@ function Card(props){
     <div className="card">
       <a href={props.data.link}>
         <img className="thumbnail" src={foto} alt="missing file" />
-        <h4>{props.data.name}</h4>
-        <p>This is a description of the project</p>
+        <div className="col">
+          <h4>{props.data.name}</h4>
+          <p>This is a description of the project</p>
+        </div>
       </a>
     </div>);
 }
@@ -105,12 +115,22 @@ function ListLinkNewTab(props){
 function ListLink(props){
     return props.items.map((item)=>
       (<li>
-        <a href={item.link}>
+        <a href={item.link}> 
         {item.name}
         </a>
       </li>));
 }
 
+function TopNav(props){
+  return (
+        <nav className="menu">
+          <input type="checkbox" id="menu-toggle" className="hidden"/>
+          <label for="menu-toggle" className="hidden"><i class="fas fa-align-justify menu-nav"></i></label>
+          <h1><a id="homeLink" href="/">Michael Crnkovich</a></h1>
+          {props.HeaderLinks}
+        </nav>
+  );
+}
 
 
 
@@ -132,17 +152,13 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <nav class="menu">
-          <a id="homeLink" href="/"><h1>Michael Crnkovich</h1></a>
-          {HeaderLinks}
-        </nav>
+        <TopNav HeaderLinks={HeaderLinks} />
         <div id="content">
           <Switch>
             <Route exact path="/">
               <About foto={foto} />
             </Route>
-            <Route path={"/projects"}>
-              <h3 id="projects">Projects</h3>
+            <Route path="/projects">
               <Projects links={proLinks} />
             </Route>
             <Route path="/blog">
