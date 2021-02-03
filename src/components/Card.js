@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------/
+ *    Returns a React Card Component
+ *    
+ *    Params: 
+ *        data.link : Provide a link to the item the card represents
+ *        data.photo: Provide a reference to a jpg for the card
+ *
+/-----------------------------------------------------------------------------*/
+
 
 import React from 'react';
 import foto from '../background.jpg';
