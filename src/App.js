@@ -1,10 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.css';
+import Card from './components/Card';
+import ListLinkNewTab from './components/ListLinkTab';
+import Projects from  './pages/Projects';
 import foto from './background.jpg';
-import useFetch from './useFetch.js'
+import useFetch from './useFetch.js';
 
 const url = "http://mcrnkovich.io/blog/wp-json/wp/v2/";
+
+const internalLinks = [
+    {link:"/", name:"Home"},
+    {link:"/blog", name:"Blog"},
+    {link:"/projects", name:"Projects"} ];
+  const links = [{link:"https://www.github.com/mrcrnkovich", name:"GitHub"},
+                  {link:"https://www.linkedin.com/in/michaelcrnkovich", name:"LinkedIn"}]
+
+  const HeaderLinks = (
+              <ul id="menu">
+                <ListLink items={internalLinks} />
+                <ListLinkNewTab items={links} />
+              </ul>);
+  
+  const proLinks = {link:"https://www.github.com/mrcrnkovich", name:"CRM"};
+ 
 
 function About(props){
   const pic = <div className="about-foto"><img className="about-foto shadow" src={props.foto} alt="Not Found" /></div>;
@@ -72,45 +91,8 @@ function SideBar(props){
 }
 
 
-function Projects(props){
-  return (
-      <div className="projects">
-        <h3 id="projects" className="shadow">Projects</h3>
-        <div className="bottom-border shadow">
-          <p> Skills: HTML5, CSS3, Javascript, Python, SQL </p>
-          <p> Libraries: Pandas, Dash, React, Bootstrap</p>
-        </div>
-        <div className="row shadow p-2">
-          <Card data={props.links} />
-          <Card data={props.links} />
-          <Card data={props.links} />
-          <Card data={props.links} />
-        </div>
-      </div>);
-}
-
-function Card(props){
-  return (
-    <div className="card">
-      <a href={props.data.link}>
-        <img className="thumbnail" src={foto} alt="missing file" />
-        <div className="col">
-          <h4>{props.data.name}</h4>
-          <p>This is a description of the project</p>
-        </div>
-      </a>
-    </div>);
-}
 
 
-function ListLinkNewTab(props){
-    return props.items.map((item)=>
-      (<li>
-        <a target="_blank" rel="noreferrer noopener" href={item.link}>
-        {item.name}
-        </a>
-      </li>));
-}
 
 function ListLink(props){
     return props.items.map((item)=>
@@ -135,21 +117,7 @@ function TopNav(props){
 
 
 function App() {
-  const links = [{link:"https://www.github.com/mrcrnkovich", name:"GitHub"},
-                  {link:"https://www.linkedin.com/in/michaelcrnkovich", name:"LinkedIn"}]
-  const internalLinks = [
-                  {link:"/", name:"Home"},
-                  {link:"/blog", name:"Blog"},
-                  {link:"/projects", name:"Projects"}];
-
-  const HeaderLinks = (
-              <ul id="menu">
-                <ListLink items={internalLinks} />
-                <ListLinkNewTab items={links} />
-              </ul>);
-  
-  const proLinks = {link:"https://www.github.com/mrcrnkovich", name:"CRM"};
-  return (
+ return (
     <Router>
       <div className="app">
         <TopNav HeaderLinks={HeaderLinks} />
