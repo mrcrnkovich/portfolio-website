@@ -1,7 +1,9 @@
 import React from 'react';
+import useFetch from '../useFetch';
 
 
 function About(props){
+  const url = "http://mcrnkovich.io/blog/wp-json/wp/v2/";
   const pic = <div className="about-foto"><img className="about-foto shadow" src={props.foto} alt="Not Found" /></div>;
   const [about, isLoading] = useFetch(url+"pages/7", { content:{ rendered:"" }});
   

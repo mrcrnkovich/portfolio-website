@@ -1,26 +1,33 @@
 /*--------------------------------------------------------------------------------/
-
-    Returns a React Router, which acts as the main entry point to the portfolio
-    website. 
-
-    Current Pages include:
-        
-          1. About Section
-          2. Access to Blog (hosted with Wordpress)
-          3. A List of projects and descriptions.
-
+*
+*   Returns a React Router, which acts as the main entry point to the portfolio
+*   website. 
+*
+*   Current Pages include:
+*       
+*         1. About Section
+*         2. Access to Blog (hosted with Wordpress)
+*         3. A List of projects and descriptions.
+*
 /--------------------------------------------------------------------------------*/
 
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+
+// Components
 import ListLink from './components/ListLink';
 import ListLinkNewTab from './components/ListLinkTab';
 import TopNav from './components/TopNav';
+
+// Page imports
+import About from './pages/About';
+import Blog from './pages/Blog';
 import Projects from  './pages/Projects';
 
 
 //    Section of constant links, etc. May get moved soon.
+import foto from './foto.jpg';
 
 const url = "http://mcrnkovich.io/blog/wp-json/wp/v2/";
 

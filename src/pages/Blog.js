@@ -1,7 +1,10 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import useFetch from '../useFetch';
+import SideBar from '../components/SideBar';
 
 function Blog(props){
+
+  const url = "http://mcrnkovich.io/blog/wp-json/wp/v2/";
 
   const [count, setCount] = useState(0);
   const [posts, isLoading] = useFetch(url+"posts",[{content:{rendered:""},
